@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--id属性 名字（唯一）
+        class属性 配置全限定名
+    -->
+    <bean id="user" class="com.atguigu.basic.User">
+        <property name="username">
+            <value>admin</value>
+        </property>
+        <property name="password">
+            <value>123456</value>
+        </property>
+        <property name="emails">
+            <list>
+                <value>admin@126.com</value>
+                <value>admin@qq.com</value>
+                <value>admin@sina.com</value>
+            </list>
+        </property>
+        <property name="tels">
+            <set>
+                <value>1381111111</value>
+                <value>1391111111</value>
+                <value>1731111111</value>
+                <value>1581111111</value>
+            </set>
+        </property>
+        <property name="address">
+            <list>
+                <value>qianwei</value>
+                <value>yangjuan</value>
+            </list>
+        </property>
+        <property name="qqs">
+            <map>
+                <entry>
+                    <key><value>admin</value></key>  <!--由于Map集合是String,String类型，故key中为value标签-->
+                    <value>123456</value>      <!--value没有标签，由于Map集合是String,String类型，故key中为value标签-->
+                </entry>
+                <entry>
+                    <key><value>admin1</value></key>
+                    <value>12345678</value>
+                </entry>
+            </map>
+        </property>
+        <property name="p">
+            <props>
+                <prop key="key1">value1</prop>
+                <prop key="key2">value2</prop>
+                <prop key="key3">value3</prop>
+                <prop key="key4">value4</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="userService" class="com.atguigu.basic.UserServiceImpl">
+        <property name="userDao">
+            <!--<bean class="com.atguigu.basic.UserDaoImpl"></bean>-->
+            <ref bean="userDao" />
+        </property>
+    </bean>
+
+    <bean id="userDao" class="com.atguigu.basic.UserDaoImpl"></bean>
+    <bean id="user1" class="com.atguigu.basic.User" p:username="admin" p:password="admin" />
+    <bean id="userService1" class="com.atguigu.basic.UserServiceImpl" p:userDao-ref="userDao" />
+
+    <bean id="customer" class="com.atguigu.constructor.Customer">
+        <!--constructor-arg的顺序与有参构造函数的参数顺序一致，个数与参数个数一致-->
+        <constructor-arg>
+            <value>admin</value>
+        </constructor-arg>
+        <constructor-arg>
+            <value>18</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="customer1" class="com.atguigu.constructor.Customer">
+        <constructor-arg type="int">
+            <value>10</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="conn" class="com.atguigu.factorybean.ConnectionFactoryBean">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/book?serverTimezone=GMT%2B8&amp;rewriteBatchedStatements=true" />
+        <property name="username" value="root"/>
+        <property name="password" value="qianwei1234" />
+    </bean>
+
+<!--    <bean id="connFactory" class="com.atguigu.factorybean.ConnectionFactory" />-->
+<!--    <bean id="conn" factory-bean="connFactory" factory-method="getConnection" />-->
+<!--    <bean id="conn" class="com.atguigu.factorybean.StaticConnectionFactory" factory-method="getConnection" />-->
+    <bean id="account" class="com.atguigu.scope.Account" init-method="myInit" destroy-method="myDestroy">
+        <property name="name" value="admin" />
+    </bean>
+
+
+
+
+</beans>
