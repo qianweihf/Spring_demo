@@ -6,7 +6,8 @@ package com.atguigu.basic;
  * @create 2022-09-18
  */
 public class UserServiceImpl implements UserService {
-    private UserDao userDao;
+    //private UserDao userDao;
+    private UserDao userDao = (UserDao) BeanFactory.getBean("userDao");
 
     public UserDao getUserDao() {
         return userDao;

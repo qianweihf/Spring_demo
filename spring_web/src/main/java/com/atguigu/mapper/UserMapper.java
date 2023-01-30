@@ -1,0 +1,11 @@
+package com.atguigu.mapper;
+
+import com.atguigu.entity.User;
+
+/**
+ * @author qianwei
+ * @create 2022-11-02 V1.0
+ */
+public interface UserMapper {
+    public void save(User user);
+}

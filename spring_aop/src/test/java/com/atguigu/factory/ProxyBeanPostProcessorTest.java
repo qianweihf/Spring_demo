@@ -16,7 +16,7 @@ public class ProxyBeanPostProcessorTest {
 
     @Test
     public void test1(){
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext1.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("/applicationContext2.xml");
         UserService userService = (UserService) ctx.getBean("userService");
         userService.login("admin","admin");
         userService.register(new User());
